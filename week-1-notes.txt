@@ -1,0 +1,54 @@
+Environment variables
+---------------------
+
+Let's say you're writing an open source project that uses photos from Facebook. Your code will need to use a secret key that will give you access to Facebook. This key is secret and you shouldn't share it with anyone. However, you want to share your open source code on Github. How should you do it?
+
+Put your secret key in an environment variable and then read it from your code when you need it. For example:
+
+$ export SECRET_KEY=12345abcde <- create an env var called SECRET_KEY
+
+Then, in your Ruby code, read the value:
+
+secret_key = ENV['SECRET_KEY']
+
+
+Profile files
+-------------
+
+The environment variables don't last for long. After you set them, they only stay in the environment until the end of the current shell session. However, you normally want them being available in all new shell sessions as well. Profile files are often used to achieve this.
+
+cat ~/.bash_profile <- to print contents of .bash_profile file
+
+We can also use the same file to create "permanent" env vars...
+
+$ echo "export SEASON=winter" >> ~/.bash_profile
+(Double angle bracket means append, while single angle bracket means overwrite)
+
+
+man and git help
+----------------
+
+$ git --help COMMAND
+
+$ man COMMAND (for any terminal command)
+
+$ touch FILENAME (the "touch" command creates an empty file with a given name)
+
+
+mastery-quizzes
+---------------
+
+In module 3, we found out that we could instruct objects to do things using messages.
+Objects might require arguments to be able to answer a message.
+We learned that the list of messages we can send to an object is called its interface.
+We saw that you could make a good guess at what an object was, based on the methods defined on its interface.
+We also saw that you can chain messages, thanks to referential transparency.
+
+Messages call methods on an object's interface.
+
+Abstract Syntax Tree
+--------------------
+
+Ruby will translate code statements like if 1 < 0; else... into something very similar to the flowchart we made: an Abstract Syntax Tree.
+Being able to deconstruct code into similar structures – whether you verbalise them, draw them out, or something else – is a crucial part of learning to work with code.
+
