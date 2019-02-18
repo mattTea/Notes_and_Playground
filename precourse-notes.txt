@@ -46,9 +46,67 @@ We also saw that you can chain messages, thanks to referential transparency.
 
 Messages call methods on an object's interface.
 
+
 Abstract Syntax Tree
 --------------------
 
 Ruby will translate code statements like if 1 < 0; else... into something very similar to the flowchart we made: an Abstract Syntax Tree.
 Being able to deconstruct code into similar structures – whether you verbalise them, draw them out, or something else – is a crucial part of learning to work with code.
 
+
+Classes
+-------
+
+We've seen so far that the 'class' keyword is shorthand for "open up this class, and do things with it".
+It's actually a bit cleverer than this. If the class given to class doesn't exist, it will be made on-the-fly.
+
+| def colour=(colour) (notes actually wrote it like "def colour=(colour)", but second example didn't include the '=')
+|   @colour = colour ('@colour' makes it an instance variable that can be used by other methods in that class)
+| end
+
+| def observe
+|   return "You see a " + @colour + " dog."
+| end
+
+above allows us to set a method (setters) that sets a property value (object state) on a class instance
+
+could be called as...
+| woman.name=("Yasmin")
+| woman.name("Yasmin")
+| woman.name = "Yasmin"
+
+N.B.
+- Chapter10
+    - Inconsistency in some syntax -> Dog class types colour method as…
+        - def colour=(colour) (but I can’t see the need for the ‘=’)
+        - Second example Person give_a_name method doesn’t use the ‘=’
+        - Then goes back to name=(name) in a later example
+            - Would be useful to know if this syntax around setters is an important differentiation
+            - Not getting much clarity from searching this either
+            - I think it depends how it is called…
+                - If called like woman.name(“Yasmin”) it would need to be def name=(name)
+                - If called as woman.name = “Yasmin" it could be def name(name)
+                - (Although playing with this it doesn't seem to matter!)
+                - (Just a convention then?)
+
+
+In Ruby, whenever we call new on a class, that class builds an object and then runs the method initialize on it:
+If we want to store information about an object as part of that object's state,
+as a property on the object, we need to interfere with this initialize method.
+
+Ruby automatically defines the initialize method, even if you don't write it.
+That's why new still worked for our Dog, Person, and Robot classes before.
+Every argument to the new function is passed to the initialize function (and no setter method is needed).
+
+class Person
+  def initialize(name) <- no '=' in here!
+    @name = name
+  end
+
+  def introduce
+    return "Hello, I'm " + @name
+  end
+end
+
+woman = Person.new("Yasmin")
+woman.introduce
